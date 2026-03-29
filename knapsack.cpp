@@ -1,7 +1,7 @@
 #include "knapsacksolver.h"
 #include <iostream>
 #include <fstream>
-#include <ctime>
+#include <chrono>
 
 int main(int argc, char* argv[]) {
   if (argc < 2) {
@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
-  std::srand(static_cast<unsigned>(std::time(nullptr)));
+  std::srand(static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count()));
 
   std::ifstream file(argv[1]);
   if (!file.is_open()) {
@@ -24,13 +24,33 @@ int main(int argc, char* argv[]) {
     file >> items[i].value >> items[i].weight;
   }
 
+  std::cout << "Hamming distances:" << std::endl;
   KnapsackSolver solver;
-  std::vector<bool> solution = solver.solveKnapsack(items, W, 1);
-  int totalValue = solver.calculateKnapsackValue(solution, items);
-
-  std::cout << "Knapsack max value: " << totalValue << std::endl << "Selected items:";
-  for (bool taken : solution) std::cout << " " << taken;
+  std::chrono::high_resolution_clock::time_point start1 = std::chrono::high_resolution_clock::now();
+  std::vector<bool> solution1 = solver.solveKnapsack(items, W, 1);
+  int value1 = solver.calculateKnapsackValue(solution1, items);
+  std::chrono::high_resolution_clock::time_point end1 = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double, std::milli> time1 = end1 - start1;
+  
+  std::cout << "Time (ms): " << time1.count() << std::endl;
+  std::cout << "Knapsack max value: " << value1 << std::endl << "Selected items:";
+  for (bool taken : solution1) std::cout << " " << taken;
   std::cout << std::endl;
+
+
+
+  std::cout << "Branches&Bounds:" << std::endl;
+  std::chrono::high_resolution_clock::time_point start2 = std::chrono::high_resolution_clock::now();
+  std::vector<bool> solution2;
+  int value2 = solver.solveBB(items, W, solution2);
+  std::chrono::high_resolution_clock::time_point end2 = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double, std::milli> time2 = end2 - start2;
+  
+  std::cout << "Time (ms): " << time2.count() << std::endl;
+  std::cout << "Knapsack max value: " << value2 << std::endl << "Selected items:";
+  for (bool taken : solution2) std::cout << " " << taken;
+  std::cout << std::endl;
+
 
   return 0;
 }

@@ -18,10 +18,13 @@ public:
 
   std::vector<bool> solveKnapsack(const std::vector<Item>& items, int capacity, int hammingDistance);
   int calculateKnapsackValue(const std::vector<bool>& solution, const std::vector<Item>& items) const;
+  int solveBB(std::vector<Item>& items, int capacity, std::vector <bool>& solution);
 
 private:
   int calculateKnapsackWeight(const std::vector<bool>& solution, const std::vector<Item>& items) const;
   void localSearchKnapsack(std::vector<bool>& solution, const std::vector<Item>& items, int capacity, int hammingDistance);
+
+  void BB(int ind, int current_weight, int current_value, std::vector<int>& order, std::vector<Item>& items, int capacity, int& best_value, std::vector<bool>& current_solution, std::vector<bool>& best_solution);
 };
 
 #endif
