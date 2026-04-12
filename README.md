@@ -11,3 +11,6 @@ g++ -o ks knapsack.cpp knapsacksolver.cpp
 ./tsp data_tsp/"имя файла"
 
 ./ks data_ks/"имя файла"
+
+
+Табличка с данными по задаче о рюкзаке: https://docs.google.com/spreadsheets/d/1nRE3fzLQkWlTRuQVKE7BOvYIh-JC5NJIzLQQ7Gpa9wg/edit?usp=sharing
