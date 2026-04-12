@@ -119,7 +119,7 @@ int KnapsackSolver::solveBB(std::vector<Item>& items, int capacity, std::vector 
   
   std::sort(order.begin(), order.end(), [&](int a, int b){return items[a].value > items[b].value;});
 
-  int best_val = 0;
+  int best_val = -1;
   std::vector<bool> cur_solution(n, false);
   solution.assign(n, false);
 

@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
   
   std::cout << "Time (ms): " << time1.count() << std::endl;
   std::cout << "Knapsack max value: " << value1 << std::endl << "Selected items:";
-  for (bool taken : solution1) std::cout << " " << taken;
+  //for (bool taken : solution1) std::cout << " " << taken;
   std::cout << std::endl;
 
 
@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
   
   std::cout << "Time (ms): " << time2.count() << std::endl;
   std::cout << "Knapsack max value: " << value2 << std::endl << "Selected items:";
-  for (bool taken : solution2) std::cout << " " << taken;
+  //for (bool taken : solution2) std::cout << " " << taken;
   std::cout << std::endl;
 
 
@@ -63,7 +63,7 @@ int main(int argc, char* argv[]) {
   
   std::cout << "Time (ms): " << time3.count() << std::endl;
   std::cout << "Knapsack max value: " << value3 << std::endl << "Selected items:";
-  for (bool taken : solution3) std::cout << " " << taken;
+  //for (bool taken : solution3) std::cout << " " << taken;
   std::cout << std::endl;
 
 
