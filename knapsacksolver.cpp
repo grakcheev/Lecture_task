@@ -152,3 +152,39 @@ void KnapsackSolver::BB(int ind, int current_weight, int current_value, std::vec
   BB(ind+1, current_weight, current_value, order, items, capacity, best_value, current_solution, best_solution);
 }
 
+
+
+
+struct calories_comparator{
+  const std::vector<Item>& items;
+  calories_comparator(const std::vector<Item>& i): items(i){}
+  bool operator()(int a, int b){
+    return items[a].value/items[a].weight > items[b].value/items[b].weight;
+  }
+};
+
+void KnapsackSolver::greed(const std::vector<Item>& items, int capacity, std::vector<bool>& solution){
+  int n = items.size();
+  solution.clear();
+  solution.resize(n, false);
+
+
+  if(n==0) return;
+
+  std::vector<int> order(n);
+
+  for(int i=0;i<n;i++) order[i] = i;
+
+  std::sort(order.begin(), order.end(), calories_comparator(items));
+
+
+  int current_weight = 0;
+  for(int i=0; i<order.size();i++){
+    int ind = order[i];
+    if(current_weight + items[ind].weight <= capacity){
+      solution[ind] = true;
+      current_weight += items[ind].weight;
+    }
+  }
+}
+

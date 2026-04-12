@@ -52,5 +52,22 @@ int main(int argc, char* argv[]) {
   std::cout << std::endl;
 
 
+
+  std::cout << "Greed algorithm:" << std::endl;
+  std::chrono::high_resolution_clock::time_point start3 = std::chrono::high_resolution_clock::now();
+  std::vector<bool> solution3;
+  solver.greed(items, W, solution3);
+  std::chrono::high_resolution_clock::time_point end3 = std::chrono::high_resolution_clock::now();
+  int value3 = solver.calculateKnapsackValue(solution3, items);
+  std::chrono::duration<double, std::milli> time3 = end3 - start3;
+  
+  std::cout << "Time (ms): " << time3.count() << std::endl;
+  std::cout << "Knapsack max value: " << value3 << std::endl << "Selected items:";
+  for (bool taken : solution3) std::cout << " " << taken;
+  std::cout << std::endl;
+
+
+
+
   return 0;
 }
